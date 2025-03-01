@@ -58,13 +58,14 @@ public class CalendarDetailsService {
     private CalendarDetailsDTO convertCalendarDetailsToDTO(CalendarDetails calendarDetails) {
         return new CalendarDetailsDTO(
                 calendarDetails.getCalendarDetailsId(),
-                calendarDetails.getPlaceName(),
+//                calendarDetails.getPlaceName(),
                 calendarDetails.getCalendar().getScheduleTime(),
                 calendarDetails.getCalendar().getScheduleEndTime(),
                 calendarDetails.getCalendar().getMemo(),
                 calendarDetails.getCalendar().getFavPlace().getPlaceName(),
                 calendarDetails.getCalendar().getFavPlace().getPlaceImage(),
-                calendarDetails.getCalendar().getFavPlace().getPlaceLocation()
+                calendarDetails.getCalendar().getFavPlace().getPlaceLocation(),
+                calendarDetails.getCalendar().getMapId()
         );
     }
 }

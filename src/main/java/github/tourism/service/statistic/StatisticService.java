@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,9 +72,29 @@ public class StatisticService {
         return purpose_Repository.findTop7ByYear(year);
     }
 
-
     public List<RankPlaceResponseDTO> getRankPlace() {
         List<RankPlace> rankPlaces = rankPlaceRepository.findAll();
+
+        Map<String, Optional<RankPlace>> latestRankPlacesMap = rankPlaces.stream()
+                .collect(Collectors.groupingBy(RankPlace::getPlaceName,
+                        Collectors.reducing((rankPlace1, rankPlace2) ->
+                                rankPlace1.getYearMonth().compareTo(rankPlace2.getYearMonth()) > 0 ? rankPlace1 : rankPlace2)));
+
+        List<RankPlace> latestRankPlaces = latestRankPlacesMap.values().stream()
+                .flatMap(Optional::stream)
+                .collect(Collectors.toList());
+
+        return latestRankPlaces.stream()
+                .sorted(Comparator.comparingInt(RankPlace::getVisitNum).reversed())
+                .map(statisticResponseDTOFactory::createRankPlaceResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<RankPlaceResponseDTO> getDiffMonthRankPlace(int year, int month) {
+        String yearMonth = String.format("%04d%02d", year, month);
+
+        List<RankPlace> rankPlaces = rankPlaceRepository.findByYearMonth(yearMonth);
+
         return rankPlaces.stream()
                 .map(statisticResponseDTOFactory::createRankPlaceResponseDTO)
                 .collect(Collectors.toList());
@@ -80,9 +103,9 @@ public class StatisticService {
     public List<VisitListResponseDTO> getVisitListStatistics() {
         List<VisitList> visitLists = visitListStatisticRepository.findAll();
         return visitLists.stream()
+                .sorted(Comparator.comparingInt(VisitList::getVisitNum).reversed())
                 .map(statisticResponseDTOFactory::createVisitListResponseDTO)
                 .collect(Collectors.toList());
     }
-
 
 }

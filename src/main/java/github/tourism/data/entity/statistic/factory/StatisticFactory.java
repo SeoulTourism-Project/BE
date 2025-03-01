@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StatisticFactory {
-
     public Statistic createStatistic(Map map) {
         return Statistic.builder()
                 .mapId(map.getMapId())

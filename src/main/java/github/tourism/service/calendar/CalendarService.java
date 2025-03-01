@@ -2,8 +2,10 @@ package github.tourism.service.calendar;
 
 import github.tourism.data.entity.calendar.Calendar;
 import github.tourism.data.entity.calendar.CalendarDetails;
+import github.tourism.data.entity.favPlace.FavPlace;
 import github.tourism.data.repository.calendar.CalendarDetailsRepository;
 import github.tourism.data.repository.calendar.CalendarRepository;
+import github.tourism.data.repository.favPlace.FavPlaceRepository;
 import github.tourism.web.dto.calendar.CalendarRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,12 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CalendarService {
     private final CalendarRepository calendarRepository;
+    private final CalendarDetailsRepository calendarDetailsRepository;
+    private final FavPlaceRepository favPlaceRepository;
 
     //  1. 특정 날짜 범위로 캘린더 항목 조회
     public List<Calendar> getCalendarEntries(Integer userId, LocalDateTime startTime, LocalDateTime endTime) {
@@ -41,6 +46,35 @@ public class CalendarService {
         }
 
         Calendar calendar = convertToEntity(dto);
+        Calendar savedCalendar = calendarRepository.save(calendar);
+
+        //  추가: CalendarDetails 엔티티 생성 및 저장
+        CalendarDetails calendarDetails = new CalendarDetails();
+        calendarDetails.setCalendar(savedCalendar);  // 캘린더와 연관 관계 설정
+//        calendarDetails.setPlaceName(dto.getPlaceName()); // 장소 이름
+//        calendarDetails.setPlaceImage(dto.getPlaceImage()); // 장소 이미지
+//        calendarDetails.setPlaceLocation(dto.getPlaceLocation()); // 장소 위치
+        calendarDetails.setScheduleTime(dto.getScheduleTime()); // 일정 시작 시간
+        calendarDetails.setScheduleEndTime(dto.getScheduleEndTime()); // 일정 종료 시간
+        calendarDetails.setMemo(dto.getMemo()); // 메모 추가
+
+        //  FavPlace 정보 가져오기 (찜한 장소 정보가 있으면 사용)
+        if (dto.getFavPlaceId() != null) {
+            Optional<FavPlace> favPlaceOpt = favPlaceRepository.findById(dto.getFavPlaceId());
+            favPlaceOpt.ifPresent(favPlace -> {
+                calendarDetails.setPlaceName(favPlace.getPlaceName());
+                calendarDetails.setPlaceImage(favPlace.getPlaceImage());
+                calendarDetails.setPlaceLocation(favPlace.getPlaceLocation());
+            });
+        } else {
+            // 클라이언트가 직접 place_name 등을 보냈다면 사용
+            calendarDetails.setPlaceName(dto.getPlaceName());
+            calendarDetails.setPlaceImage(dto.getPlaceImage());
+            calendarDetails.setPlaceLocation(dto.getPlaceLocation());
+        }
+
+        calendarDetailsRepository.save(calendarDetails); //
+
         return calendarRepository.save(calendar);
     }
 

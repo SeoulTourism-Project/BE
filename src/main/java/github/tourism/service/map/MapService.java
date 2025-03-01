@@ -89,6 +89,14 @@ public class MapService {
         }
     }
 
+    // placeName으로 likeMarkCount 조회
+    public Integer getLikesByPlaceName(String placeName) {
+        Map map = mapRepository.findMapByPlaceName(placeName)
+                .orElseThrow(() -> new IllegalArgumentException("찜한 장소가 없습니다."));
+
+        return map.getLikemarkCount();
+    }
+
 
 
 }

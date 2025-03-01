@@ -57,12 +57,12 @@ public class StatisticResponseDTOFactoryImpl implements StatisticResponseDTOFact
     public RankPlaceResponseDTO createRankPlaceResponseDTO(RankPlace rankPlace) {
         RankPlaceResponseDTO dto = new RankPlaceResponseDTO();
         dto.setRank(rankPlace.getRank());
-        dto.setCityName(rankPlace.getCity_name());
-        dto.setTownshipName(rankPlace.getTownship_name());
-        dto.setPlaceName(rankPlace.getPlace_name());
-        dto.setYearMonth(rankPlace.getYear_month());
-        dto.setVisitNum(rankPlace.getVisit_num());
-        dto.setVisitTotalNum(rankPlace.getVisit_total_num());
+        dto.setCityName(rankPlace.getCityName());
+        dto.setTownshipName(rankPlace.getTownshipName());
+        dto.setPlaceName(rankPlace.getPlaceName());
+        dto.setYearMonth(rankPlace.getYearMonth());
+        dto.setVisitNum(rankPlace.getVisitNum());
+        dto.setVisitTotalNum(rankPlace.getVisitTotalNum());
         return dto;
     }
 
@@ -70,13 +70,13 @@ public class StatisticResponseDTOFactoryImpl implements StatisticResponseDTOFact
     public VisitListResponseDTO createVisitListResponseDTO(VisitList visitList) {
         VisitListResponseDTO dto = new VisitListResponseDTO();
         dto.setRank(visitList.getRank());
-        dto.setCityName(visitList.getCity_name());
-        dto.setTownshipName(visitList.getTownship_name());
-        dto.setAdministrativeName(visitList.getAdministrative_name());
-        dto.setVisitNum(visitList.getVisit_num());
-        dto.setPreviousTotalPopulation(visitList.getPrevious_total_population());
+        dto.setCityName(visitList.getCityName());
+        dto.setTownshipName(visitList.getTownshipName());
+        dto.setAdministrativeName(visitList.getAdministrativeName());
+        dto.setVisitNum(visitList.getVisitNum());
+        dto.setPreviousTotalPopulation(visitList.getPreviousTotalPopulation());
         dto.setRatio(visitList.getRatio());
-        dto.setYearMonth(visitList.getYear_month());
+        dto.setYearMonth(visitList.getYearMonth());
         return dto;
     }
 }

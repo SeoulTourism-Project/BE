@@ -16,8 +16,6 @@ public class Statistic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_statistics_id")
     private Integer statisticsId;
-    @Column(name = "user_id")
-    private Integer userId;
     @Column(name = "map_id")
     private Integer mapId;
     @Column(name = "user_ranking")

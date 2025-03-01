@@ -22,7 +22,7 @@ public enum ErrorCode {
     ENTRY_POINT_FAILURE(401,"인증되지 않은 사용자입니다.", HttpStatus.UNAUTHORIZED),
     ACCESS_DENIED(403,"접근할 수 있는 권한이 없습니다.", HttpStatus.FORBIDDEN),
     EMAIL_NOT_EXIST(404,"해당 이메일의 사용자를 찾을 수 없습니다.",HttpStatus.NOT_FOUND),
-    EMAIL_ALREADY_EXIST(400,"이미 존재하는 이메일입니다.",HttpStatus.BAD_REQUEST),
+    EMAIL_ALREADY_EXIST(400,"다른 이메일을 사용해주시길 바랍니다.",HttpStatus.BAD_REQUEST),
     WEAK_PASSWORD(400,"비밀번호는 최소 8자 이상이어야 합니다.",HttpStatus.BAD_REQUEST),
     ROLE_FAILURE(400,"사용자 권한이 없습니다.",HttpStatus.BAD_REQUEST),
     UNAUTHORIZED_REFRESH(400,"Refresh Token이 없습니다.",HttpStatus.BAD_REQUEST),
@@ -39,7 +39,10 @@ public enum ErrorCode {
     CART_EMPTY(404,"사용자의 장바구니가 비어있습니다.", HttpStatus.NOT_FOUND),
     MAPS_NOT_FOUNDED(404,"해당 맵을 찾을 수 없습니다.",HttpStatus.NOT_FOUND),
 
-
+    FAILURE_MYPAGE(404,"개인 정보를 찾을 수 없습니다.",HttpStatus.BAD_REQUEST),
+    FAILURE_MYPAGE2(400,"개인 정보를 불러올 수 없습니다.",HttpStatus.BAD_REQUEST),
+    FAILURE_MYPAGE3(400,"에러가 발생되어 개인 정보를 수정할 수 없습니다.",HttpStatus.BAD_REQUEST),
+    FAILURE_MYPAGE4(400,"개인 정보 수정 중 문제가 발생했습니다.",HttpStatus.BAD_REQUEST),
     NOT_SAVED_PLACE(400,"존재하지 않는 장소입니다.",HttpStatus.BAD_REQUEST);
 
     private final int statusCode;

@@ -10,6 +10,5 @@ import lombok.*;
 public class UserInfoDTO {
     private String email;
     private String category;
-    private String username;
     private String roles;
 }

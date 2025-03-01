@@ -1,5 +1,6 @@
 package github.tourism.data.entity.calendar;
 
+import github.tourism.data.entity.favPlace.FavPlace;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,11 +23,17 @@ public class CalendarDetails {
 
     // Calendar 엔티티와 연관된 외래 키를 참조
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "calendar_id", referencedColumnName = "calendar_id", insertable = false, updatable = false)
+    @JoinColumn(name = "calendar_id", referencedColumnName = "calendar_id")
     private Calendar calendar;
+
+    //  추가: FavPlace 연관 관계 설정
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fav_place_id", referencedColumnName = "fav_place_id", insertable = false, updatable = false)
+    private FavPlace favPlace;
 
 //    @Column(name = "calendar_id")
 //    private Integer calendarId ;
+
 
     @Column(name = "place_name")
     private String placeName ;

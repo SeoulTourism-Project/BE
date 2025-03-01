@@ -36,7 +36,7 @@
 
 ### 2.2 배포 URL
 #### Frontend
-- https://seoultourismweb.vercel.app **--> 임시로 작성하여 추후 수정하겠습니다.**<br>
+- https://seoultourismweb.vercel.app
 #### Backend
 - http://ec2-3-36-66-32.ap-northeast-2.compute.amazonaws.com:8080/
 - 테스트용 계정
@@ -45,7 +45,7 @@
     pw : super1234!
     ```
 
-### 2.3  URL 구조 --> 나중에 프론트 배포가 끝나면 프론트 URL추가 작성
+### 2.3  URL 구조 ※나중에 프론트 배포가 끝나면 프론트 URL추가 작성
 
 - **User**
 
@@ -136,17 +136,17 @@
 사용자가 사이트를 사용하여 여행 계획을 수립할 때 저장한 여행지를 수집하여, 통계적으로 유의미한 인사이트를 도출합니다.  이를 통해 해당 사이트를 사용하는 사용자의 선호도를 확인하고 차트를 활용하여 통계 결과를 직관적으로 이해할 수 있도록 합니다.
 
 ## 4. 메인 기능
-### 4-1. 공공데이터 Open API를 이용한 통계 분석 및 시각화-->밑에 작성된 내용에 빠진 내용및 사용된 방식 추가/수정 부탁드립니다.
+### 4-1. 공공데이터 Open API를 이용한 통계 분석 및 시각화
 - 한국 관광 데이터랩에서 제공한 데이터를 가공하고 통계를 차트로 시각화
-- selenium과 airflow 또는 spring batch를 이용한 정기적인 업데이트
+- Selenium과 Spring WebClient, Spring Batch를 이용한 정기적인 업데이트
 - 캘린더에 저장된 여행지를 수집하여 사용자의 여행지 선호도 순위를 시각화
 
-### 4-2. 캘린더를 통한 일정 관리-->밑에 작성된 내용에 빠진 내용및 사용된 방식 추가/수정 부탁드립니다.
+### 4-2. 캘린더를 통한 일정 관리
 - 여행지를 찜(장바구니 개념)한다
 - 찜한 여행지를 이용해 날짜와시간을 설정하여 타임 테이블을 생성
 - 생성된 타임 테이블을 캘린더에서 확인 가능
 
-### 4-3. 문화재 및 전통 기법을 이용한 굿즈 소개 및 판매-->밑에 작성된 내용에 빠진 내용및 사용된 방식 추가/수정 부탁드립니다.
+### 4-3. 문화재 및 전통 기법을 이용한 굿즈 소개 및 판매
 - 해당 굿즈에 대한 내용 및 수량을 확인
 - 장바구니에 해당 품목을 저장
 - 아임포트를 사용하여 결제 구현
@@ -166,19 +166,19 @@
 
 ![](src/main/resources/image/ERD.png)
 
-## 7. Architecture --> 화면은 gif,jpg 파일로 repository에 src/resources/image에 업로드해주세요.
+## 7. Architecture
 
 ![architecture-seoulTourism](https://github.com/user-attachments/assets/4d0e1d58-f510-41d3-af85-599cdca60648)
 
 
 
-## 8. 와이어프레임 / UI / BM --> 프론트에서 작업이 완료되는대로 추가/수정, 화면은 gif,jpg 파일로 repository에 src/resources/image에 업로드해주세요.
+## 8. 와이어프레임 / UI / BM ※프론트에서 작업이 완료되는대로 추가/수정, 화면은 gif,jpg 파일로 repository에 src/resources/image에 업로드해주세요.
 ### 8.1 와이어프레임
 - 아래 페이지별 상세 설명, 더 큰 이미지로 하나하나씩 설명 필요
 
 [![](https://github.com/weniv/project_sample_repo/raw/main/ui.png)](https://github.com/weniv/project_sample_repo/blob/main/ui.png)
 
-### 8.2 화면 설계 --> 프론트에서 작업이 완료되는대로 추가/수정, 화면은 gif,jpg 파일로 repository에 src/resources/image에 업로드해주세요.
+### 8.2 화면 설계
 |   |   |
 |---|---|
 |메인|로그인|

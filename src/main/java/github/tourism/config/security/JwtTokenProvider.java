@@ -40,10 +40,11 @@ public class JwtTokenProvider {
         secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "HmacSHA256");
     }
 
-    public String createToken(String category,String email, String username, List<String> roles) {
+    public String createToken(String category,Integer userId,String email, String username, List<String> roles) {
         Claims claims = Jwts.claims()
                 .setSubject(email);
         claims.put("category",category);
+        claims.put("userId",userId);
         claims.put("username", username);
         claims.put("roles", roles);
 
@@ -57,11 +58,10 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createRefreshToken(String category,String email, String username, List<String> roles ){
+    public String createRefreshToken(String category,String email,List<String> roles ){
         Claims claims = Jwts.claims()
                 .setSubject(email);
         claims.put("category",category);
-        claims.put("username", username);
         claims.put("roles", roles);
 
         Date now = new Date();
@@ -127,10 +127,7 @@ public class JwtTokenProvider {
                 .getBody()
                 .getSubject();
     }
-    public String getUsername(String token) {
 
-        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("username", String.class);
-    }
     public List<String> getRoles(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
@@ -177,8 +174,8 @@ public class JwtTokenProvider {
         return UserInfoDTO.builder()
                 .email(claimsBody.getSubject())
                 .category(claimsBody.getOrDefault("category", "").toString())
-                .username(claimsBody.getOrDefault("username", "").toString())
                 .roles(String.join(",", (List<String>) claimsBody.getOrDefault("roles", new ArrayList<>())))
                 .build();
     }
+
 }

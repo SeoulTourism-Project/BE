@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,7 +20,6 @@ public interface MapRepository extends JpaRepository<Map, Integer> {
     //카테고리별로 조회
     Page<Map> findByCategory(Pageable pageable, String category);
 
-    Optional<Map> findByCategory(String category);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT m FROM Map m WHERE m.mapId = :mapId")
@@ -33,4 +33,9 @@ public interface MapRepository extends JpaRepository<Map, Integer> {
     @Query("UPDATE Map m SET m.likemarkCount = m.likemarkCount - 1 WHERE m.mapId = :mapId AND m.likemarkCount > 0")
     void decrementLikemarkCount(@Param("mapId") Integer mapId);
 
+    List<Map> findByCategory(String category);
+
+    // placeName으로 likeMarkCount 조회
+    @Query("SELECT m FROM Map m WHERE m.place_name = :placeName")
+    Optional <Map> findMapByPlaceName(@Param("placeName") String placeName);
 }

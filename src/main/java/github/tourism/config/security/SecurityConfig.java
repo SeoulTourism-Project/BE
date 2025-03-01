@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .headers(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .rememberMe(AbstractHttpConfigurer::disable)
@@ -49,7 +50,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/resources/static/**","/auth/login","/auth/signup", "/auth/email",
                                 "/v3/api-docs/**", "/swagger-ui/**","/api/goods/**","/api/maps/**",
-                                "/api/statistic/**","/reissue","/health"
+                                "/api/statistic/**","/reissue","/health","/user/statistic/**"
                         ).permitAll()
                         .requestMatchers("/auth/secession","/calendar/**","/calendar-details/**"
                                 ,"/cart/**","/order/**" ,"/api/mypage/**", "/payments/**").hasAuthority("ROLE_USER")
@@ -59,8 +60,8 @@ public class SecurityConfig {
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                         .accessDeniedHandler(new CustomerAccessDeniedHandler())
                 )
-                .addFilterBefore(new CustomLogoutFilter(jwtTokenProvider, refreshRepository), LogoutFilter.class)
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new CustomLogoutFilter(jwtTokenProvider, refreshRepository), LogoutFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

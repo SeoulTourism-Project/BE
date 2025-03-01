@@ -7,10 +7,7 @@ import github.tourism.web.dto.statistic.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -96,7 +93,7 @@ public class StatisticController {
         }
     }
 
-
+    // 많이 방문한 여행지
     @GetMapping("/rankplace")
     public ResponseEntity<ApiResponse<List<RankPlaceResponseDTO>>> showRankPlaceStatistic() {
         try {
@@ -106,7 +103,17 @@ public class StatisticController {
             return ResponseEntity.badRequest().body(ApiResponse.onFailure(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
         }
     }
+    @GetMapping("/rankplace/{year}/{month}")
+    public ResponseEntity<ApiResponse<List<RankPlaceResponseDTO>>> showDiffMonthRankPlaceStatistic(@PathVariable int year, @PathVariable int month) {
+        try {
+            List<RankPlaceResponseDTO> rankPlaceStatistics = statisticService.getDiffMonthRankPlace(year, month);
+            return ResponseEntity.ok(ApiResponse.onSuccess(rankPlaceStatistics));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.onFailure(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
+        }
+    }
 
+    // 많이 방문한 동네
     @GetMapping("/visitlist")
     public ResponseEntity<ApiResponse<List<VisitListResponseDTO>>> showVisitListStatistic() {
         try {
