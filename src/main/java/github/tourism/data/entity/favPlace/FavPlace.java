@@ -26,11 +26,11 @@ public class FavPlace {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer favPlaceId ;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "map_id")
     private Map map;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -62,8 +62,6 @@ public class FavPlace {
         this.placeLocation = map.getPlace_location();
         this.placeImage = map.getPlace_image();
         this.placeDetailsInfo = map.getPlace_info();
-        //이제 찜인지?? 좋아요인지?? 용도가 머지??
-        this.likeStatus = false;
     }
 
 }

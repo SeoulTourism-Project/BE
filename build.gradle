@@ -21,7 +21,7 @@ configurations {
 
 repositories {
     mavenCentral()
-    //    ++ Payment(아임포트-포트원) 관련: 추가!
+    //    ++ Payment(아임포트-포트원) 관련: 추가!!
     maven { url 'https://jitpack.io' }
 }
 
