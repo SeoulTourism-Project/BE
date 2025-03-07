@@ -62,6 +62,7 @@ public class FavPlace {
         this.placeLocation = map.getPlace_location();
         this.placeImage = map.getPlace_image();
         this.placeDetailsInfo = map.getPlace_info();
+        this.likeStatus = true;
     }
 
 }
