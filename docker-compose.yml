@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   tourism-app:
-    image: tourism-app
+    image: bbizin1004/tourism-app:latest
     container_name: tourism-container
     restart: always
     ports:
