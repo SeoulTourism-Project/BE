@@ -54,6 +54,12 @@ public class MapController {
     @GetMapping("/{mapId}")
     public ResponseEntity<MapDetailsDTO> getMapDetail(@PathVariable Integer mapId,
                                                       @AuthenticationPrincipal CustomUserDetails user) {
+
+        if (user == null) {
+            System.out.println("사용자가 로그인하지 않았음!");
+        } else {
+            System.out.println("로그인한 사용자 ID: " + user.getUserId());
+        }
         Integer userId = null;
         if(user != null){
              userId = Integer.valueOf(user.getUserId());

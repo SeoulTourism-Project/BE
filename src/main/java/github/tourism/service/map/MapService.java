@@ -78,13 +78,15 @@ public class MapService {
 
 
         if (findFavPlace.isPresent()) {
-            //찜 제거
+            //찜 제거 (찜을 했던 경우)
+            System.out.println("찜 삭제 : userId = " + userId + ", mapId = " + mapId);
             favPlaceRepository.delete(findFavPlace.get());
             //Map의 likemarkCount 감소
             mapRepository.decrementLikemarkCount(mapId);
             return false;
         } else {
-            // 찜 등록
+            // 찜 등록 (찜이 없는 경우)
+            System.out.println("찜 추가 : userId = " + userId + ", mapId = " + mapId);
             FavPlace favPlace = new FavPlace(map,user);
             favPlaceRepository.save(favPlace);
             //장소를 다른 사용자가 찜했으므로 likemarkCount 증가
