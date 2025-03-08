@@ -80,11 +80,15 @@ public class MapService {
         if (findFavPlace.isPresent()) {
             //찜 제거
             favPlaceRepository.delete(findFavPlace.get());
+            //Map의 likemarkCount 감소
+            mapRepository.decrementLikemarkCount(mapId);
             return false;
         } else {
             // 찜 등록
             FavPlace favPlace = new FavPlace(map,user);
             favPlaceRepository.save(favPlace);
+            //장소를 다른 사용자가 찜했으므로 likemarkCount 증가
+            mapRepository.incrementLikemarkCount(mapId);
             return true;
         }
     }

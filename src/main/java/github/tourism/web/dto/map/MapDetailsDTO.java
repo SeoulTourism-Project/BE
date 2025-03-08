@@ -22,6 +22,7 @@ public class MapDetailsDTO {
     private BigDecimal lat;
     private BigDecimal lng;
     private boolean isFavorite;
+    private Integer likemarkCount;
 
     public MapDetailsDTO(Map map) {
         this.map_id = map.getMapId();
@@ -35,6 +36,7 @@ public class MapDetailsDTO {
 //        this.category = map.getCategory();
         this.lat = map.getLat();
         this.lng = map.getLng();
+        this.likemarkCount = map.getLikemarkCount();
     }
 
     public void setFavorite(boolean isFavorite) {
