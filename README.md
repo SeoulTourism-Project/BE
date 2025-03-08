@@ -36,7 +36,7 @@
 
 ### 2.2 배포 URL
 #### Frontend
-- https://seoultourismweb.vercel.app **--> 임시로 작성하여 추후 수정하겠습니다.**<br>
+- https://seoultourismweb.vercel.app
 #### Backend
 - https://seoultourism.store
 - 테스트용 계정
