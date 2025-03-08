@@ -38,7 +38,6 @@
 #### Frontend
 - https://seoultourismweb.vercel.app **--> 임시로 작성하여 추후 수정하겠습니다.**<br>
 #### Backend
-- http://ec2-3-36-66-32.ap-northeast-2.compute.amazonaws.com:8080/
 - https://seoultourism.store
 - 테스트용 계정
     ```
