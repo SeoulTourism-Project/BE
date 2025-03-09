@@ -62,9 +62,15 @@ public class MapController {
         Integer userId = null;
 
         if(authentication != null && authentication.isAuthenticated()){
-            CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
-            userId = Integer.valueOf(user.getUserId());
+            Object principal = authentication.getDetails();
+
+            if(principal instanceof CustomUserDetails){
+              CustomUserDetails userDetails = (CustomUserDetails) principal;
+              userId = Integer.valueOf(userDetails.getUserId());
             System.out.println("로그인한 사용자 요청 - userId: " + userId);
+            } else {
+                System.out.println("비회원 조회 - anonymousUser");
+            }
         } else {
             System.out.println("비회원 조회 요청");
         }
