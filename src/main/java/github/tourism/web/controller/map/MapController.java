@@ -10,7 +10,9 @@ import org.springframework.data.web.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -52,18 +54,21 @@ public class MapController {
 
     //맵 상세조회
     @GetMapping("/{mapId}")
-    public ResponseEntity<MapDetailsDTO> getMapDetail(@PathVariable Integer mapId,
-                                                      @AuthenticationPrincipal CustomUserDetails user) {
+    public ResponseEntity<MapDetailsDTO> getMapDetail(@PathVariable Integer mapId) {
 
-        if (user == null) {
-            System.out.println("사용자가 로그인하지 않았음!");
-        } else {
-            System.out.println("로그인한 사용자 ID: " + user.getUserId());
-        }
+        //현재 사용자 인증 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         Integer userId = null;
-        if(user != null){
-             userId = Integer.valueOf(user.getUserId());
+
+        if(authentication != null && authentication.isAuthenticated()){
+            CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+            userId = Integer.valueOf(user.getUserId());
+            System.out.println("로그인한 사용자 요청 - userId: " + userId);
+        } else {
+            System.out.println("비회원 조회 요청");
         }
+
         MapDetailsDTO mapDetails = mapService.getMapDetail(mapId,userId);
         return ResponseEntity.ok(mapDetails);
     }
