@@ -62,7 +62,7 @@ public class MapController {
         Integer userId = null;
 
         if(authentication != null && authentication.isAuthenticated()){
-            Object principal = authentication.getDetails();
+            Object principal = authentication.getPrincipal();
 
             if(principal instanceof CustomUserDetails){
               CustomUserDetails userDetails = (CustomUserDetails) principal;
