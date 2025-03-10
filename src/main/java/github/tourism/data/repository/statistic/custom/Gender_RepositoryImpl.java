@@ -36,7 +36,6 @@ public class Gender_RepositoryImpl implements GenderRepositoryCustom {
     public List<GenderTop7DTO> findTop7CountriesByYear(int year) {
         return queryFactory
                 .select(Projections.constructor(GenderTop7DTO.class,
-                                gender_Statistic.year,
                                 gender_Statistic.country,
                                 gender_Statistic.total_population.sum(),
                                 gender_Statistic.male_population.sum(),

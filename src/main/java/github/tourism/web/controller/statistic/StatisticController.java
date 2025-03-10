@@ -31,12 +31,12 @@ public class StatisticController {
 
     //프론트 요청에 의해 맵핑 주소를 이것만 씀.
     //성별통계-월별 방문인구 많은순으로 상위 7개 나라 조회
-    @GetMapping("/gender")
-    public ResponseEntity<GenderTop7ResponseDTO> getGenderTop7ByMonth(
+    @GetMapping("/genderTop7ByMonth")
+    public ResponseEntity<ApiResponse<GenderTop7ResponseDTO>> getGenderTop7ByMonth(
             @RequestParam int year, @RequestParam int month) {
         try {
             GenderTop7ResponseDTO responseDTO = statisticService.getGenderTop7ByMonth(year, month);
-            return ResponseEntity.ok(responseDTO);
+            return ResponseEntity.ok(ApiResponse.onSuccess(responseDTO));
         }   catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
@@ -44,10 +44,10 @@ public class StatisticController {
 
     //성별통계-연도별 나라의 총방문객수 상위7개 합산 데이터 조회
     @GetMapping("/genderTop7ByYear")
-    public ResponseEntity<ApiResponse<List<GenderTop7DTO>>> getGenderTop7ByYear(
+    public ResponseEntity<ApiResponse<GenderTop7ResponseToYearDTO>> getGenderTop7ByYear(
             @RequestParam int year) {
         try {
-            List<GenderTop7DTO> top7ByYear = statisticService.getGenderTop7ByYear(year);
+            GenderTop7ResponseToYearDTO top7ByYear = statisticService.getGenderTop7ByYear(year);
             return ResponseEntity.ok(ApiResponse.onSuccess(top7ByYear));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.onFailure(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
@@ -68,14 +68,14 @@ public class StatisticController {
     }
 
     //목적통계-월별 탑7 나라 조회
-    @GetMapping("/purpose")
-    public ResponseEntity<PurposeTop7ResponseDTO> getPurposeTop7ByMonth(
+    @GetMapping("/purposeTop7ByMonth")
+    public ResponseEntity<ApiResponse<PurposeTop7ResponseDTO>> getPurposeTop7ByMonth(
             @RequestParam int year, @RequestParam int month) {
 
         //프론트엔드 API 요청 양식에 따라 수정함.
         try {
             PurposeTop7ResponseDTO responseDTO = statisticService.getTop7PurposeByMonth(year, month);
-            return ResponseEntity.ok(responseDTO);
+            return ResponseEntity.ok(ApiResponse.onSuccess(responseDTO));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
@@ -83,10 +83,10 @@ public class StatisticController {
 
     //목적통계-연도별 탑7 나라 데이터 합산 조회
     @GetMapping("/purposeTop7ByYear")
-    public ResponseEntity<ApiResponse<List<PurposeTop7DTO>>> getPurposeTop7ByYear(
+    public ResponseEntity<ApiResponse<PurposeTop7ResponseToYearDTO>> getPurposeTop7ByYear(
             @RequestParam int year) {
         try {
-            List<PurposeTop7DTO> top7PurposeByYear = statisticService.getTop7PurposeByYear(year);
+            PurposeTop7ResponseToYearDTO top7PurposeByYear = statisticService.getTop7PurposeByYear(year);
             return ResponseEntity.ok(ApiResponse.onSuccess(top7PurposeByYear));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.onFailure(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
@@ -103,8 +103,8 @@ public class StatisticController {
             return ResponseEntity.badRequest().body(ApiResponse.onFailure(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
         }
     }
-    @GetMapping("/rankplace/{year}/{month}")
-    public ResponseEntity<ApiResponse<List<RankPlaceResponseDTO>>> showDiffMonthRankPlaceStatistic(@PathVariable int year, @PathVariable int month) {
+    @GetMapping("/rankPlaceByMonth")
+    public ResponseEntity<ApiResponse<List<RankPlaceResponseDTO>>> showDiffMonthRankPlaceStatistic(@RequestParam int year, @RequestParam int month) {
         try {
             List<RankPlaceResponseDTO> rankPlaceStatistics = statisticService.getDiffMonthRankPlace(year, month);
             return ResponseEntity.ok(ApiResponse.onSuccess(rankPlaceStatistics));
