@@ -26,11 +26,11 @@ public class FavPlace {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer favPlaceId ;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "map_id")
     private Map map;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
