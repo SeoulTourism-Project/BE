@@ -9,23 +9,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PurposeTop7DTO {
     private String country;
-    private int total_population;
-    private int travel_population;
-    private int commercial_population;
-    private int public_population;
-    private int study_population;
-    private int etc_population;
+    private int totalPopulation;
+    private int travelPopulation;
+    private int commercialPopulation;
+    private int publicPopulation;
+    private int studyPopulation;
+    private int etcPopulation;
 
 
     @QueryProjection
     public PurposeTop7DTO(String country, int total_population, int travel_population, int commercial_population, int public_population, int study_population, int etc_population) {
         this.country = country;
-        this.total_population = total_population;
-        this.travel_population = travel_population;
-        this.commercial_population = commercial_population;
-        this.public_population = public_population;
-        this.study_population = study_population;
-        this.etc_population = etc_population;
+        this.totalPopulation = total_population;
+        this.travelPopulation = travel_population;
+        this.commercialPopulation = commercial_population;
+        this.publicPopulation = public_population;
+        this.studyPopulation = study_population;
+        this.etcPopulation = etc_population;
     }
 }
 

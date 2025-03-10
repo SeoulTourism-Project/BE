@@ -47,8 +47,9 @@ public class StatisticService {
         return new GenderTop7ResponseDTO(year,month,top7List);
     }
     //성별테이블에서 연도에 따라 각나라의 총 월 방문객수를 합산하여 총 방문객,총 성별 방문객을 조회
-    public List<GenderTop7DTO> getGenderTop7ByYear(int year) {
-        return gender_Repository.findTop7CountriesByYear(year);
+    public GenderTop7ResponseToYearDTO getGenderTop7ByYear(int year) {
+        List<GenderTop7DTO> top7Year = gender_Repository.findTop7CountriesByYear(year);
+        return new GenderTop7ResponseToYearDTO(year,top7Year);
     }
 
     // 목적 통계 전체 조회
@@ -68,8 +69,9 @@ public class StatisticService {
     }
 
     //목적 통계에서 년별 총 방문객수 상위 7개 나라 데이터 조회
-    public List<PurposeTop7DTO> getTop7PurposeByYear(int year) {
-        return purpose_Repository.findTop7ByYear(year);
+    public PurposeTop7ResponseToYearDTO getTop7PurposeByYear(int year) {
+        List<PurposeTop7DTO> top7ToList = purpose_Repository.findTop7ByYear(year);
+        return new PurposeTop7ResponseToYearDTO(year,top7ToList);
     }
 
     public List<RankPlaceResponseDTO> getRankPlace() {

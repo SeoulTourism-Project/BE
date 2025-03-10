@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GenderTop7DTO {
     private String country;
-    private int total_Population;
-    private int male_Population;
-    private int female_Population;
+    private int totalPopulation;
+    private int malePopulation;
+    private int femalePopulation;
 
     @QueryProjection
     public GenderTop7DTO(String country, int total_Population, int male_Population,
                          int female_Population) {
         this.country = country;
-        this.total_Population = total_Population;
-        this.male_Population = male_Population;
-        this.female_Population = female_Population;
+        this.totalPopulation = total_Population;
+        this.malePopulation = male_Population;
+        this.femalePopulation = female_Population;
     }
 }
